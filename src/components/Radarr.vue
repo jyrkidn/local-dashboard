@@ -1,6 +1,6 @@
 <template>
   <div class="radarr">
-    <img height="50" src="http://192.168.0.195:7878/Content/Images/logos/128.png" alt="Radarr logo">
+    <img alt="Radarr logo" src="../assets/radarr.png">
 
     Coming out next three months:
     <ul>
