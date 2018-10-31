@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import api from '../utils/api'
+import api from '../services/api'
 
 // TODO: add movie via dashboard
 export default {

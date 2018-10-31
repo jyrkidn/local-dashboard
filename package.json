@@ -10,7 +10,8 @@
   "dependencies": {
     "register-service-worker": "^1.0.0",
     "vue": "^2.5.17",
-    "vuex": "^3.0.1"
+    "vuex": "^3.0.1",
+    "weather-icons2": "^2.0.10"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.5",

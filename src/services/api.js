@@ -6,5 +6,7 @@ export default async (url) => {
     return result
   } catch (error) {
     console.error(error)
+
+    return {}
   }
 }
