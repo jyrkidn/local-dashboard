@@ -1,5 +1,21 @@
 # local-dashboard
 
+## Components
+
+* Calendar
+* Weather
+* Radarr
+* Sonarr
+* Deluge
+* MotionEye
+* Pi-Hole
+* Plex
+* Survivor
+* Server status
+** Mara
+** Perkons
+** Pi-Hole
+
 ## Project setup
 ```
 npm install
