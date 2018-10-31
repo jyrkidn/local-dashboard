@@ -1,6 +1,8 @@
 <template>
   <div class="radarr">
-    <img alt="Radarr logo" src="../assets/radarr.png">
+    <a :href="apiBase" target="_blank">
+      <img alt="Radarr logo" src="../assets/radarr.png">
+    </a>
 
     Coming out next three months:
     <ul>
@@ -47,7 +49,7 @@ export default {
       return this.apiUrl(movie.images[0].url)
     },
     apiUrl (path) {
-      return `${this.apiBase}/${path}?apikey=${this.apiToken}`
+      return `${this.apiBase}api/${path}?apikey=${this.apiToken}`
     },
     distanceInWords
   }

@@ -1,6 +1,8 @@
 <template>
   <div class="sonarr">
-    <img alt="Sonarr logo" src="../assets/sonarr.png">
+    <a :href="apiBase" target="_blank">
+      <img alt="Sonarr logo" src="../assets/sonarr.png">
+    </a>
 
     Coming out next 7 days:
     <ul>
@@ -48,7 +50,7 @@ export default {
       return show.images[0].url
     },
     apiUrl (path) {
-      return `${this.apiBase}/${path}?apikey=${this.apiToken}`
+      return `${this.apiBase}api/${path}?apikey=${this.apiToken}`
     },
     zeroPadding,
     distanceInWords

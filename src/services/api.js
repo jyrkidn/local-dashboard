@@ -1,7 +1,17 @@
-export default async (url) => {
+export default async (url, method = 'json') => {
   try {
-    const response = await fetch(url)
-    const result = await response.json()
+    const headers = new Headers({
+      'Accept': 'application/json'
+    })
+
+    url = url.replace(/(?<!:)\/\//g, '/')
+
+    const request = new Request(url, {
+      headers
+    })
+
+    const response = await fetch(request)
+    const result = await response[method]()
 
     return result
   } catch (error) {
