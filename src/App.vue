@@ -2,20 +2,20 @@
   <div id="app">
     <Radarr />
     <Sonarr />
-    <!-- <Weather /> -->
+    <Weather />
   </div>
 </template>
 
 <script>
 import Radarr from './components/Radarr'
 import Sonarr from './components/Sonarr'
-// import Weather from './components/Weather'
+import Weather from './components/Weather'
 
 export default {
   name: 'app',
   components: {
     Radarr,
-    // Weather,
+    Weather,
     Sonarr
   }
 }

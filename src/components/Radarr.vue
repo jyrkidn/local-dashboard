@@ -5,9 +5,13 @@
     Coming out next three months:
     <ul>
       <li v-for="movie in movies" :key="movie.id">
+        <span v-if="movie.physicalRelease">
+          Physical release in {{ distanceInWords(new Date(), movie.physicalRelease) }}
+        </span>
+        <span v-if="!movie.physicalRelease">
+          In cinemas in {{ distanceInWords(new Date(), movie.inCinemas) }}
+        </span>
         {{ movie.title }}
-        {{ movie.inCinemas }}
-        {{ movie.physicalRelease }}
         <img v-if="movieImage(movie)" height="50" :src="movieImage(movie)" :alt="movie.title" />
       </li>
     </ul>
@@ -16,6 +20,8 @@
 
 <script>
 import api from '../services/api'
+import addMonths from 'date-fns/add_months'
+import distanceInWords from 'date-fns/distance_in_words'
 
 // TODO: add movie via dashboard
 export default {
@@ -26,8 +32,7 @@ export default {
     apiToken: process.env.VUE_APP_RADARR_TOKEN
   }),
   async created () {
-    let date = new Date()
-    date.setMonth(date.getMonth() + 3)
+    const date = addMonths(new Date(), 3)
 
     this.movies = await api(
       `${this.apiUrl('/calendar')}&end=${date.toLocaleDateString()}`
@@ -43,7 +48,8 @@ export default {
     },
     apiUrl (path) {
       return `${this.apiBase}/${path}?apikey=${this.apiToken}`
-    }
+    },
+    distanceInWords
   }
 }
 </script>

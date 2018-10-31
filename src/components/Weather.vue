@@ -28,7 +28,9 @@
 </template>
 
 <script>
+import format from 'date-fns/format'
 import weather from '../services/weather'
+
 export default {
   name: 'Weather',
   data: () => ({
@@ -48,8 +50,8 @@ export default {
   methods: {
     refreshTime () {
       const datetime = new Date()
-      this.time = this.zeroPadding(datetime.getHours()) + ':' + this.zeroPadding(datetime.getMinutes()) + ':' + this.zeroPadding(datetime.getSeconds())
-      this.date = this.zeroPadding(datetime.getDate()) + '-' + this.zeroPadding(datetime.getMonth() + 1) + '-' + this.zeroPadding(datetime.getFullYear(), 4)
+      this.time = format(datetime, 'HH:mm:ss')
+      this.date = format(datetime, 'DD/MM/YYYY')
     },
     async fetchWeather () {
       const item = await weather.get(this.city)
@@ -62,13 +64,6 @@ export default {
     },
     iconClass (code) {
       return `wi-yahoo-${code}`
-    },
-    zeroPadding (num, digit = 2) {
-      let zero = ''
-      for (let i = 0; i < digit; i++) {
-        zero += '0'
-      }
-      return (zero + num).slice(-digit)
     }
   }
 }
