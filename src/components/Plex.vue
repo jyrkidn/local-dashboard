@@ -32,7 +32,11 @@ export default {
   methods: {
     async getSessions () {
       const data = await api(this.apiUrl('status/sessions'))
-      this.sessions = data.MediaContainer.Metadata
+      if (data.MediaContainer.size > 0 && data.MediaContainer.Metadata) {
+        this.sessions = data.MediaContainer.Metadata
+      } else {
+        this.sessions = []
+      }
     },
     apiUrl (path) {
       let url = `${this.apiBase}${path}?X-Plex-Token=${this.apiToken}`
