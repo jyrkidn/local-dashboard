@@ -1,19 +1,20 @@
 <template>
-  <div class="motion-eye">
-    <a :href="link" target="_blank">
-      <img alt="MotionEye Logo" height="64" src="../assets/motioneye.svg">
-    </a>
-
+  <tile :logo="logo" :link="link">
     <img height="200" :src="streamLink">
-  </div>
+  </tile>
 </template>
 
 <script>
+import Tile from '../elements/Tile'
+import logo from '../assets/motioneye.svg'
+
 export default {
   name: 'MotionEye',
+  components: { Tile },
   data: () => ({
     link: process.env.VUE_APP_MOTIONEYE,
-    streamLink: process.env.VUE_APP_MOTIONEYE_STREAM
+    streamLink: process.env.VUE_APP_MOTIONEYE_STREAM,
+    logo
   })
 }
 </script>

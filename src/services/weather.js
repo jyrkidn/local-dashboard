@@ -2,11 +2,11 @@ import api from './api'
 
 class Weather {
   async get (city) {
-    const query = `select item from weather.forecast where woeid in (select woeid from geo.places(1) where text='${city}') and u='c'`
+    const query = `select * from weather.forecast where woeid in (select woeid from geo.places(1) where text='${city}') and u='c'`
 
     const response = await this.performQuery(query)
 
-    return response.query.results.channel.item
+    return response.query.results.channel
   }
 
   async performQuery (query) {

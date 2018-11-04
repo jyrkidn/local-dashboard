@@ -1,6 +1,6 @@
 {
-  "name": "local-dashboard",
-  "short_name": "local-dashboard",
+  "name": "Dashboard",
+  "short_name": "dashboard",
   "icons": [
     {
       "src": "./img/icons/android-chrome-192x192.png",

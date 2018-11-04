@@ -1,17 +1,18 @@
 <template>
-  <div class="deluge">
-    <a :href="link" target="_blank">
-      <img alt="Deluge Logo" height="64" src="../assets/deluge.webp">
-    </a>
-
-  </div>
+  <tile :logo="logo" :link="link">
+  </tile>
 </template>
 
 <script>
+import Tile from '../elements/Tile'
+import logo from '../assets/deluge.webp'
+
 export default {
   name: 'Deluge',
+  components: { Tile },
   data: () => ({
-    link: process.env.VUE_APP_DELUGE
+    link: process.env.VUE_APP_DELUGE,
+    logo
   })
 }
 </script>

@@ -1,37 +1,38 @@
 <template>
-  <div class="radarr">
-    <a :href="apiBase" target="_blank">
-      <img alt="Radarr logo" src="../assets/radarr.png">
-    </a>
-
-    Coming out next three months:
-    <ul>
-      <li v-for="movie in movies" :key="movie.id">
-        <span v-if="movie.physicalRelease">
-          Physical release in {{ distanceInWords(new Date(), movie.physicalRelease) }}
+  <tile :logo="logo" :link="apiBase" title="Coming out next three months">
+    <List :items="movies">
+      <template slot="title" slot-scope="{ item }">
+        {{ item.title }}
+      </template>
+      <template slot="info" slot-scope="{ item }">
+        <span v-if="item.physicalRelease">
+          Physical release in {{ distanceInWords(new Date(), item.physicalRelease) }}
         </span>
-        <span v-if="!movie.physicalRelease">
-          In cinemas in {{ distanceInWords(new Date(), movie.inCinemas) }}
+        <span v-if="!item.physicalRelease">
+          In cinemas in {{ distanceInWords(new Date(), item.inCinemas) }}
         </span>
-        {{ movie.title }}
-        <img v-if="movieImage(movie)" height="50" :src="movieImage(movie)" :alt="movie.title" />
-      </li>
-    </ul>
-  </div>
+      </template>
+    </List>
+  </tile>
 </template>
 
 <script>
 import api from '../services/api'
 import addMonths from 'date-fns/add_months'
 import distanceInWords from 'date-fns/distance_in_words'
+import List from '../elements/List'
+import Tile from '../elements/Tile'
+import logo from '../assets/radarr.png'
 
 // TODO: add movie via dashboard
 export default {
   name: 'Radarr',
+  components: { Tile, List },
   data: () => ({
     movies: [],
     apiBase: process.env.VUE_APP_RADARR_BASE,
-    apiToken: process.env.VUE_APP_RADARR_TOKEN
+    apiToken: process.env.VUE_APP_RADARR_TOKEN,
+    logo
   }),
   async created () {
     const date = addMonths(new Date(), 3)

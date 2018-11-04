@@ -1,19 +1,30 @@
 <template>
-  <div class="pi-hole">
-    Ads blocked today: {{ data.ads_blocked_today }}
-    DNS queries today: {{ data.dns_queries_today }}
-    Unique clients: {{ data.unique_clients }}
-  </div>
+  <tile :logo="logo" :link="link">
+    <List :items="items">
+      <template slot="title" slot-scope="{ item }">
+        {{ item.title }}
+      </template>
+      <template slot="info" slot-scope="{ item }">
+        {{ item.info }}
+      </template>
+    </List>
+  </tile>
 </template>
 
 <script>
 import api from '../services/api'
+import Tile from '../elements/Tile'
+import List from '../elements/List'
+import logo from '../assets/pihole.svg'
 
 export default {
   name: 'PiHole',
+  components: { Tile, List },
   data: () => ({
-    apiUrl: `${process.env.VUE_APP_PIHOLE}admin/api.php`,
-    data: {}
+    link: process.env.VUE_APP_PIHOLE,
+    apiUrl: 'admin/api.php',
+    items: [],
+    logo
   }),
   created () {
     this.getData()
@@ -21,7 +32,20 @@ export default {
   },
   methods: {
     async getData () {
-      this.data = await api(this.apiUrl)
+      const data = await api(this.link + this.apiUrl)
+
+      this.items.push({
+        title: 'Ads blocked today',
+        info: data.ads_blocked_today
+      })
+      this.items.push({
+        title: 'DNS queries today',
+        info: data.dns_queries_today
+      })
+      this.items.push({
+        title: 'Unique clients',
+        info: data.unique_clients
+      })
     }
   }
 }

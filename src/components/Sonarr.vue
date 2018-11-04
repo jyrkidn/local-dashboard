@@ -1,36 +1,37 @@
 <template>
-  <div class="sonarr">
-    <a :href="apiBase" target="_blank">
-      <img alt="Sonarr logo" src="../assets/sonarr.png">
-    </a>
-
-    Coming out next 7 days:
-    <ul>
-      <li v-for="show in shows" :key="show.id">
-        <time :datetime="show.airDateUtc">
-          In {{ distanceInWords(new Date(), show.airDateUtc) }}
-        </time>
-        (S{{zeroPadding(show.seasonNumber)}}/E{{zeroPadding(show.episodeNumber)}})
-        {{ show.series.title }}: {{ show.title }}
-        <img v-if="showImage(show.series)" height="50" :src="showImage(show.series)" :alt="show.title" />
-      </li>
-    </ul>
-  </div>
+  <tile :logo="logo" :link="apiBase" title="Coming out next 7 days">
+    <List :items="shows">
+      <template slot="title" slot-scope="{ item }">
+        (S{{zeroPadding(item.seasonNumber)}}/E{{zeroPadding(item.episodeNumber)}})
+        {{ item.series.title }}: {{ item.title }}
+      </template>
+      <template slot="info" slot-scope="{ item }">
+        <span>
+          In {{ distanceInWords(new Date(), item.airDateUtc) }}
+        </span>
+      </template>
+    </List>
+  </tile>
 </template>
 
 <script>
+import Tile from '../elements/Tile'
 import api from '../services/api'
 import zeroPadding from '../utils/zeroPadding'
 import distanceInWords from 'date-fns/distance_in_words'
 import addDays from 'date-fns/add_days'
+import List from '../elements/List'
+import logo from '../assets/sonarr.png'
 
 // TODO: add TV show via dashboard
 export default {
   name: 'Sonarr',
+  components: { Tile, List },
   data: () => ({
     shows: [],
     apiBase: process.env.VUE_APP_SONARR_BASE,
-    apiToken: process.env.VUE_APP_SONARR_TOKEN
+    apiToken: process.env.VUE_APP_SONARR_TOKEN,
+    logo
   }),
   async created () {
     const currentDate = new Date()
