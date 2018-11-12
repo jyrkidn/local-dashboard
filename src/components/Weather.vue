@@ -1,5 +1,5 @@
 <template>
-  <tile class="highlight">
+  <tile :row="3" :column="3" class="highlight">
     <h3 class="date">{{ date }}</h3>
     <h2 class="time">{{ time }}</h2>
     <div class="weather">
@@ -36,6 +36,7 @@ import Tile from '../elements/Tile'
 export default {
   name: 'Weather',
   components: { Tile },
+  props: ['position'],
   data: () => ({
     city: process.env.VUE_APP_CITY,
     date: '',

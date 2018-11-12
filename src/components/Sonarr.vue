@@ -1,5 +1,5 @@
 <template>
-  <tile :logo="logo" :link="apiBase" title="Coming out next 7 days">
+  <tile :row="6" :column="2" :logo="logo" :link="apiBase" title="Coming out next 7 days">
     <List :items="shows">
       <template slot="title" slot-scope="{ item }">
         (S{{zeroPadding(item.seasonNumber)}}/E{{zeroPadding(item.episodeNumber)}})
@@ -27,6 +27,7 @@ import logo from '../assets/sonarr.png'
 export default {
   name: 'Sonarr',
   components: { Tile, List },
+  props: ['position'],
   data: () => ({
     shows: [],
     apiBase: process.env.VUE_APP_SONARR_BASE,

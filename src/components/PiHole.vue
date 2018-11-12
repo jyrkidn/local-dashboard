@@ -1,5 +1,5 @@
 <template>
-  <tile :logo="logo" :link="link">
+  <tile :row="3" :column="1" :logo="logo" :link="link">
     <List :items="items">
       <template slot="title" slot-scope="{ item }">
         {{ item.title }}
@@ -20,6 +20,7 @@ import logo from '../assets/pihole.svg'
 export default {
   name: 'PiHole',
   components: { Tile, List },
+  props: ['position'],
   data: () => ({
     link: process.env.VUE_APP_PIHOLE,
     apiUrl: 'admin/api.php',

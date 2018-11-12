@@ -1,5 +1,5 @@
 <template>
-  <tile :logo="logo" :link="apiBase">
+  <tile :row="2" :column="1" :logo="logo" :link="apiBase">
     <div v-if="sessions.length > 0">
       <div v-for="session in sessions" :key="session.index">
         Playing {{ getTitle(session) }} via {{ session.Player.title }}
@@ -20,6 +20,7 @@ import logo from '../assets/plex.png'
 export default {
   name: 'Plex',
   components: { Tile },
+  props: ['position'],
   data: () => ({
     sessions: [],
     apiBase: process.env.VUE_APP_PLEX,

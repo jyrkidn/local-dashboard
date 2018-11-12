@@ -1,12 +1,13 @@
 <template>
-  <div id="app">
-    <Weather class="span-2" />
-    <PiHole />
-    <Radarr class="span-2" />
-    <Sonarr class="span-2" />
-    <Plex />
-    <MotionEye />
-    <Deluge />
+<!-- A1-L5 -->
+  <div id="app" class="wrapper">
+    <Weather position="A1:F2" modifiers="overflow" />
+    <PiHole position="G1:I2" modifiers="overflow" />
+    <Sonarr position="J1:L3" modifiers="overflow" />
+    <Radarr position="A3:C4" modifiers="overflow" />
+    <Plex position="D3:E3" modifiers="overflow" />
+    <MotionEye position="F3:I5" modifiers="overflow" />
+    <Deluge position="L4:L4" modifiers="overflow" />
   </div>
 </template>
 
@@ -36,29 +37,58 @@ export default {
 <style lang="scss" scoped>
 @import 'styles/variables';
 
-#app {
+.wrapper {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  grid-auto-rows: 110px;
   grid-gap: 10px;
-  grid-auto-rows: minmax(180px, auto);
-  grid-auto-flow: dense;
-  padding: 10px;
 
-  .grid-item {
+  .tile {
     border-radius: 5px;
     padding: 1rem;
     font-size: 14px;
     background-color: $fifth;
     box-shadow: 0px 0px 15px 0px rgba(68,91,200,0.15);
+    overflow: hidden;
+  }
+}
 
-    &.span-2 {
-      grid-column-end: span 2;
-      // grid-row-end: span 2;
-    }
+@media (min-width: 1281px) {
+  .wrapper {
+     grid-template-columns: repeat(8, 1fr);
+  }
+}
 
-    &.span-3 {
-      grid-column-end: span 3;
-    }
+@media (min-width: 1025px) and (max-width: 1280px) {
+  .wrapper {
+     grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .wrapper {
+     grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+@media (min-width: 601px) and (max-width: 767px) {
+  .wrapper {
+     grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (min-width: 481px) and (max-width: 600px) {
+  .wrapper {
+     grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+  .wrapper {
+     grid-template-columns: repeat(1, 1fr);
+
+     .tile {
+       grid-column: span 1 !important;
+     }
   }
 }
 </style>

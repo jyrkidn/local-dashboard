@@ -1,5 +1,5 @@
 <template>
-  <div class="grid-item">
+  <div :style="tilePosition" class="tile">
     <div v-if="link || logo || title" class="item-header">
       <a v-if="link && logo" :href="link" target="_blank">
         <img alt="Logo" :src="logo">
@@ -16,7 +16,33 @@
 <script>
 export default {
   name: 'Tile',
-  props: [ 'logo', 'link', 'title' ]
+  props: {
+    logo: {
+      default: '',
+      type: String
+    },
+    link: {
+      default: '',
+      type: String
+    },
+    title: {
+      default: '',
+      type: String
+    },
+    row: {
+      default: 1,
+      type: Number
+    },
+    column: {
+      default: 1,
+      type: Number
+    }
+  },
+  computed: {
+    tilePosition () {
+      return `grid-row: span ${this.row}; grid-column: span ${this.column};`
+    }
+  }
 }
 </script>
 

@@ -1,5 +1,5 @@
 <template>
-  <tile :logo="logo" :link="apiBase" title="Coming out next three months">
+  <tile :row="3" :column="2" :logo="logo" :link="apiBase" title="Coming out next three months">
     <List :items="movies">
       <template slot="title" slot-scope="{ item }">
         {{ item.title }}
@@ -28,6 +28,7 @@ import logo from '../assets/radarr.png'
 export default {
   name: 'Radarr',
   components: { Tile, List },
+  props: ['position'],
   data: () => ({
     movies: [],
     apiBase: process.env.VUE_APP_RADARR_BASE,
